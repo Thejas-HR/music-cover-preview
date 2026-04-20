@@ -33,7 +33,7 @@ export default function SpotifyPlayer({
 
   return (
     <div
-      className="fixed inset-0 flex flex-col text-white overflow-hidden"
+      className="absolute inset-0 flex flex-col text-white overflow-hidden"
       style={{
         background,
         paddingTop: "max(env(safe-area-inset-top), 16px)",
