@@ -34,7 +34,7 @@ export default function SpotifyDesktopPlayer({
 
   return (
     <div
-      className="relative h-dvh w-full overflow-hidden text-white flex flex-col"
+      className="absolute inset-0 overflow-hidden text-white flex flex-col"
       style={{ background }}
     >
       <header className="flex items-center justify-between px-10 pt-8">

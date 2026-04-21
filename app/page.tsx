@@ -58,22 +58,48 @@ export default function Home() {
     );
   }
 
+  const spotifyActive = platform === "spotify";
+  const fadeBase =
+    "transition-opacity duration-500 ease-in-out motion-reduce:transition-none";
+
   return (
     <main className="relative flex-1 bg-black">
       <div className="md:hidden">
-        {platform === "spotify" ? (
+        <div
+          className={`${fadeBase} ${
+            spotifyActive ? "opacity-100" : "opacity-0 pointer-events-none"
+          }`}
+          aria-hidden={!spotifyActive}
+        >
           <SpotifyPlayer imgUrl={imgUrl} dominant={palette.dominant} />
-        ) : (
+        </div>
+        <div
+          className={`${fadeBase} ${
+            !spotifyActive ? "opacity-100" : "opacity-0 pointer-events-none"
+          }`}
+          aria-hidden={spotifyActive}
+        >
           <AppleMusicPlayer imgUrl={imgUrl} palette={palette.palette} />
-        )}
+        </div>
       </div>
 
-      <div className="hidden md:block">
-        {platform === "spotify" ? (
+      <div className="relative hidden md:block h-dvh w-full">
+        <div
+          className={`absolute inset-0 ${fadeBase} ${
+            spotifyActive ? "opacity-100" : "opacity-0 pointer-events-none"
+          }`}
+          aria-hidden={!spotifyActive}
+        >
           <SpotifyDesktopPlayer imgUrl={imgUrl} dominant={palette.dominant} />
-        ) : (
+        </div>
+        <div
+          className={`absolute inset-0 ${fadeBase} ${
+            !spotifyActive ? "opacity-100" : "opacity-0 pointer-events-none"
+          }`}
+          aria-hidden={spotifyActive}
+        >
           <AppleMusicDesktopPlayer imgUrl={imgUrl} palette={palette.palette} />
-        )}
+        </div>
       </div>
 
       <PlatformToggle platform={platform} onChange={setPlatform} onReset={reset} />

@@ -38,7 +38,7 @@ export default function AppleMusicDesktopPlayer({
   ];
 
   return (
-    <div className="relative h-dvh w-full overflow-hidden text-white">
+    <div className="absolute inset-0 overflow-hidden text-white">
       <div className="absolute inset-0 -z-10">
         <Image
           src={imgUrl}
