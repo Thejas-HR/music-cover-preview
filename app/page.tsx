@@ -1,10 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import Uploader from "@/components/Uploader";
 import SpotifyPlayer from "@/components/SpotifyPlayer";
 import AppleMusicPlayer from "@/components/AppleMusicPlayer";
+import SpotifyDesktopPlayer from "@/components/SpotifyDesktopPlayer";
+import AppleMusicDesktopPlayer from "@/components/AppleMusicDesktopPlayer";
 import PlatformToggle, { Platform } from "@/components/PlatformToggle";
 import { extractColors, Palette } from "@/lib/extractColors";
 
@@ -59,41 +60,20 @@ export default function Home() {
 
   return (
     <main className="relative flex-1 bg-black">
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 overflow-hidden hidden md:block"
-      >
-        <Image
-          src={imgUrl}
-          alt=""
-          fill
-          sizes="100vw"
-          unoptimized
-          className="object-cover blur-3xl scale-110 opacity-40"
-        />
-        <div className="absolute inset-0 bg-black/60" />
+      <div className="md:hidden">
+        {platform === "spotify" ? (
+          <SpotifyPlayer imgUrl={imgUrl} dominant={palette.dominant} />
+        ) : (
+          <AppleMusicPlayer imgUrl={imgUrl} palette={palette.palette} />
+        )}
       </div>
 
-      <div className="relative min-h-dvh md:flex md:items-center md:justify-center md:py-12 md:px-6">
-        <div
-          className="
-            fixed inset-0
-            md:static md:inset-auto
-            md:h-[min(88vh,860px)]
-            md:w-auto md:aspect-[9/19.5]
-            md:rounded-[52px]
-            md:overflow-hidden
-            md:border-[11px] md:border-neutral-900
-            md:shadow-[0_40px_90px_rgba(0,0,0,0.7),inset_0_0_0_1px_rgba(255,255,255,0.08)]
-            md:bg-black
-          "
-        >
-          {platform === "spotify" ? (
-            <SpotifyPlayer imgUrl={imgUrl} dominant={palette.dominant} />
-          ) : (
-            <AppleMusicPlayer imgUrl={imgUrl} palette={palette.palette} />
-          )}
-        </div>
+      <div className="hidden md:block">
+        {platform === "spotify" ? (
+          <SpotifyDesktopPlayer imgUrl={imgUrl} dominant={palette.dominant} />
+        ) : (
+          <AppleMusicDesktopPlayer imgUrl={imgUrl} palette={palette.palette} />
+        )}
       </div>
 
       <PlatformToggle platform={platform} onChange={setPlatform} onReset={reset} />

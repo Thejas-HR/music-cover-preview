@@ -37,7 +37,7 @@ export default function AppleMusicPlayer({
 
   return (
     <div
-      className="absolute inset-0 flex flex-col overflow-hidden text-white"
+      className="fixed inset-0 flex flex-col overflow-hidden text-white"
       style={{
         paddingTop: "max(env(safe-area-inset-top), 12px)",
         paddingBottom: "max(env(safe-area-inset-bottom), 12px)",
